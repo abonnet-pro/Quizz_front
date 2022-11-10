@@ -1,0 +1,158 @@
+body {
+    background: url("./assets/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    font-family: 'Neucha';
+}
+
+.bg-primary {
+    background-color: transparent !important;
+}
+
+.navbar {
+    border-style: hidden !important
+}
+
+.gribouillis1 {
+    position: fixed !important;
+    left: -100px;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.gribouillis2 {
+    position: fixed !important;
+    left: 300px;
+    bottom: 200px;
+    opacity: 0.4;
+    width: 250px;
+    z-index: -1;
+}
+
+.gribouillis3 {
+    position: fixed !important;
+    left: 1300px;
+    bottom: -100px;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.gribouillis4 {
+    position: fixed !important;
+    left: 1600px;
+    opacity: 0.4;
+    width: 250px;
+    transform: rotate(-12deg);
+    z-index: -1;
+}
+
+.cadre {
+    position: absolute;
+    top: 50%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+    width: 750px
+}
+
+.box-login {
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      width: 350px;
+      animation: 2s;
+}
+
+.back-box-login {
+    z-index: 100;
+    background: url("./assets/cadre.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      width: 550px;
+      height: 550px;
+}
+
+.box-signup {
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      width: 350px;
+      animation: 2s;
+}
+
+.back-box-signup {
+    z-index: 100;
+    background: url("./assets/cadre.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      width: 550px;
+      height: 650px;
+}
+
+legend {
+   text-align: center; 
+}
+
+.leader-title {
+    color: white;
+}
+
+@media screen and (max-width: 1360px)
+{
+    .gribouillis1 {
+        display:none;
+    }
+    .gribouillis2 {
+        display:none;
+    }
+    .gribouillis3 {
+        display:none;
+    }
+    .gribouillis4 {
+        display:none;
+    }
+}
+
+@media screen and (max-width: 800px)
+{
+    .back-box-login {
+        width: 450px;
+        height: 450px;
+    }
+
+    .box-login {
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 500px)
+{
+    .back-box-login {
+        width: 350px;
+        height: 350px;
+    }
+
+    .box-login {
+        width: 200px;
+    }
+}
