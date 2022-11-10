@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../assets/logo.png'
+import {contextPrototype} from "../services/usersContext.service";
 
 export default function Header() {
   return (
@@ -25,18 +26,26 @@ export default function Header() {
       </div>
       <form className="d-flex">
       <div className="navbar-nav me-auto">
-      <div className="nav-item dropdown">
-          <Link className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</Link>
-          <div className="dropdown-menu">
-            <Link to="/my-account" className="dropdown-item" href="#">Mon compte</Link>
-            <Link to='/my-results' className="dropdown-item" href="#">Mes résultats</Link>
-            <div className="dropdown-divider"></div>
-            <Link to="signout" className="dropdown-item" href="#">Déconnexion</Link>
+        <div className="nav-item dropdown">
+            <Link className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</Link>
+            <div className="dropdown-menu dropdown">
+              <Link to="/my-account" className="dropdown-item" href="#">Mon compte</Link>
+              <Link to='/my-results' className="dropdown-item" href="#">Mes résultats</Link>
+              <div className="dropdown-divider"></div>
+              <Link to="/signout" className="dropdown-item" href="#">Déconnexion</Link>
+            </div>
           </div>
         </div>
-        </div>
-        <Link to='/login' className="btn btn-outline-light me-sm-2" type="submit">Connexion</Link>
-        <Link to='/signup' className="btn btn-secondary my-2 my-sm-0" type="submit">Inscription</Link>
+        {
+          contextPrototype.user ?
+              <>
+              </>
+              :
+              <>
+                <Link to='/login' className="btn btn-outline-light me-sm-2" type="submit">Connexion</Link>
+                <Link to='/signup' className="btn btn-secondary my-2 my-sm-0" type="submit">Inscription</Link>
+              </>
+        }
       </form>
     </div>
   </div>

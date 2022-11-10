@@ -12,6 +12,9 @@ import { useState } from 'react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Leaderboard from './pages/Leaderboard';
+import Logout from "./pages/Logout";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
@@ -31,14 +34,13 @@ function App() {
     <img className='gribouillis2' src={Gribouillis2} alt='gribouillis' />
     <img className='gribouillis3' src={Gribouillis3} alt='gribouillis' />
     <img className='gribouillis4' src={Gribouillis4} alt='gribouillis' />
+      <ToastContainer hideProgressBar/>
     <div className='container'>
     <Routes>
-      {/* Route principale */}
       <Route path='/' element={<Home />} />
-      {/* Routes Authentification */}
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
-      {/* Routes générales */}
+      <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
       <Route path='/leaderboard' element={<Leaderboard />} />
     </Routes>
     </div>
