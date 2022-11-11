@@ -5,5 +5,5 @@ export const token = () => {
 }
 
 export const headerToken = {
-    headers: { 'Authorization' : 'bearer ' + token() }
+    headers: { 'Authorization' : 'Bearer ' + token() }
 }
