@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../assets/logo.png'
 import {contextPrototype} from "../services/usersContext.service";
+import {admin} from "../services/role.service";
 
 export default function Header() {
   return (
@@ -23,6 +24,12 @@ export default function Header() {
         <div className="nav-item">
           <Link to='/leaderboard' className="nav-link">Classement</Link>
         </div>
+        {
+          admin() ? <div className="nav-item">
+            <Link to='/questions' className="nav-link">Questions</Link>
+          </div> : <></>
+        }
+
       </div>
       <form className="d-flex">
       <div className="navbar-nav me-auto">

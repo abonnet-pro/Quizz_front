@@ -16,6 +16,9 @@ import Logout from "./pages/Logout";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CategorieChooser from "./components/categorieChooser";
+import Questions from "./pages/Questions";
+import CategorieQuestions from "./pages/CategorieQuestions";
+import QuestionForm from "./pages/QuestionForm";
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
@@ -44,6 +47,9 @@ function App() {
         <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/wheel' element={<CategorieChooser />} />
+        <Route path='/questions' element={ <Questions/> }/>
+        <Route path='/categorie/:id/questions' element={ <CategorieQuestions/> }/>
+        <Route path='/categorie/:id/question/form' element={ <QuestionForm/> }/>
       </Routes>
     </div>
     </>

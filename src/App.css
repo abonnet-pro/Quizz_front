@@ -166,13 +166,21 @@ legend {
     }
 }
 
-.my-modal {
-    margin: 0;
-    position: absolute;
-    top: 45%;
-    left: 45%;
-    width: 200px;
-    height: 200px;
+.pointer {
+    cursor: pointer;
+}
+
+.question:hover {
+    color: #5e5e5e;
+}
+
+.description {
+    text-decoration: none;
+}
+
+.trash {
+    text-align: right;
+    color: #9d0011;
 }
 
 .wheel {

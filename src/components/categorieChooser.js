@@ -16,7 +16,7 @@ export default function CategorieChooser() {
     const [go, setGo] = useState(false);
 
     const loadCategorie = () => {
-        axios.get(`${API}/categorie/all`, headerToken)
+        axios.get(`${API}/categorie/available`, headerToken)
             .then(res => {
                 setCategories(res.data)
                 buildDatas(res.data)
