@@ -15,6 +15,7 @@ import Leaderboard from './pages/Leaderboard';
 import Logout from "./pages/Logout";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CategorieChooser from "./components/categorieChooser";
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
@@ -36,13 +37,14 @@ function App() {
     <img className='gribouillis4' src={Gribouillis4} alt='gribouillis' />
       <ToastContainer hideProgressBar/>
     <div className='container'>
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<Signup />} />
-      <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
-      <Route path='/leaderboard' element={<Leaderboard />} />
-    </Routes>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
+        <Route path='/leaderboard' element={<Leaderboard />} />
+        <Route path='/wheel' element={<CategorieChooser />} />
+      </Routes>
     </div>
     </>
   );
