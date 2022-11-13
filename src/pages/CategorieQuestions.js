@@ -4,6 +4,7 @@ import axios from "axios";
 import {API} from "../services/url.service";
 import {headerToken} from "../services/http.service";
 import {handleError} from "../services/error.service";
+import {Button, Modal} from "react-bootstrap";
 import {toast} from "react-toastify";
 
 export default function CategorieQuestions () {
@@ -11,7 +12,9 @@ export default function CategorieQuestions () {
     const navigate = useNavigate();
     const params = useParams();
     const [questions, setQuestions] = useState([]);
+    const [idQuestionToDelete, setIdQuestionToDelete] = useState(null);
     const [categorie, setCategorie] = useState({});
+    const [showModal, setShowModal] = useState(false);
 
     const loadQuestions = () => {
         axios.get(`${API}/categorie/${params.id}`, headerToken)
@@ -36,10 +39,20 @@ export default function CategorieQuestions () {
     }
 
     const handleClickDelete = (id) => {
-        axios.delete(`${API}/question/${id}`, headerToken)
+        setIdQuestionToDelete(id);
+        setShowModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    }
+
+    const handleDelete = () => {
+        axios.delete(`${API}/question/${idQuestionToDelete}`, headerToken)
             .then(_ => {
                 toast.success("Suppréssion effectuée");
                 loadQuestions();
+                setShowModal(false);
             })
             .catch(err => {
                 handleError(err)
@@ -56,6 +69,21 @@ export default function CategorieQuestions () {
                 <button className="go" onClick={handleClickNew}>Nouvelle question</button>
             </div>
             <br />
+
+            <Modal className="my-modal" show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Suppression</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Etes vous sur de vouloir supprimer la question ? </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Annuler
+                    </Button>
+                    <Button variant="primary" onClick={handleDelete}>
+                        Valider
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
             {
                 questions.length > 0 ?

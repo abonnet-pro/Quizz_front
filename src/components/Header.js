@@ -4,7 +4,7 @@ import Logo from '../assets/logo.png'
 import {contextPrototype} from "../services/usersContext.service";
 import {admin} from "../services/role.service";
 
-export default function Header() {
+export default function Header({ score }) {
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -29,10 +29,20 @@ export default function Header() {
             <Link to='/questions' className="nav-link">Questions</Link>
           </div> : <></>
         }
-
       </div>
+      {
+        contextPrototype.user ?
+            <>
+              <span className="score me-5"><i className="bi bi-star me-1"></i>{score?.score}</span>
+              <span className="medaille or me-3"><i className="bi bi-trophy me-1"></i>{score?.nbMedailleOr}</span>
+              <span className="medaille argent me-3"><i className="bi bi-trophy me-1"></i>{score?.nbMedailleArgent}</span>
+              <span className="medaille bronze me-3"><i className="bi bi-trophy me-1"></i>{score?.nbMedailleBronze}</span>
+            </>
+            : <></>
+      }
       <form className="d-flex">
       <div className="navbar-nav me-auto">
+
         <div className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</Link>
             <div className="dropdown-menu dropdown">

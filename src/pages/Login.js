@@ -30,7 +30,7 @@ export default function Login() {
           localStorage.clear();
           setLocaleStorage(USER_KEY, result.data)
           contextPrototype.setUser(result.data);
-            navigate('/');
+          navigate('/');
         })
         .catch(error => handleError(error));
   }

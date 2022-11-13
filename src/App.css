@@ -180,12 +180,15 @@ legend {
 
 .trash {
     text-align: right;
-    color: #9d0011;
 }
 
 .wheel {
     text-align: -webkit-center;
     margin-top: 5%;
+}
+
+.my-modal {
+    margin-top: 10%;
 }
 
 .go {
@@ -205,6 +208,32 @@ legend {
     font-size: 30px;
     font-family: "Cabin Sketch", cursive;
 }
+
+.delete-categorie {
+    padding: 10px;
+}
+
+.medaille {
+    font-size: 25px;
+}
+
+.score {
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.medaille.or {
+    color: gold;
+}
+
+.medaille.argent {
+    color: silver;
+}
+
+.medaille.bronze {
+    color: saddlebrown;
+}
+
 
 .btn-lancer-quizz {
     margin: 0;

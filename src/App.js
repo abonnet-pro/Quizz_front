@@ -8,12 +8,12 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import { getLocalStorage, USER_KEY } from './services/localStorage.service';
 import { contextPrototype, UserContext } from './services/usersContext.service'
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Leaderboard from './pages/Leaderboard';
 import Logout from "./pages/Logout";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CategorieChooser from "./components/categorieChooser";
 import Questions from "./pages/Questions";
@@ -22,6 +22,7 @@ import QuestionForm from "./pages/QuestionForm";
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
+  const [score, setScore] = useState(null);
 
   contextPrototype.user = user;
   contextPrototype.setUser = setUser;
@@ -30,10 +31,11 @@ function App() {
     user: user,
     setUser: setUser
   }
+
   return (
     <>
     <UserContext.Provider value={contextValue}/>
-    <Header />
+    <Header score={ score }/>
     <img className='gribouillis1' src={Gribouillis1} alt='gribouillis' />
     <img className='gribouillis2' src={Gribouillis2} alt='gribouillis' />
     <img className='gribouillis3' src={Gribouillis3} alt='gribouillis' />
@@ -41,7 +43,7 @@ function App() {
       <ToastContainer hideProgressBar/>
     <div className='container'>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home setScore={ setScore } user={ user } />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
