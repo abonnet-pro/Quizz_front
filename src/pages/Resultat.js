@@ -14,10 +14,8 @@ export default function Resultat({ historique }) {
     }
 
     function getResultat() {
-
-
         if(resultat === 0) {
-            return "Vous ni perdu ni gagné de point"
+            return "Vous avez ni perdu ni gagné de point"
         }
         if(resultat > 0) {
             return `Vous avez gagné ${resultat} points !`
