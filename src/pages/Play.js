@@ -9,7 +9,6 @@ import {contextPrototype} from "../services/usersContext.service";
 export default function Play( { setScore, setHistorique, historique } ) {
   const [questions, setQuestions] = useState([]);
   const [idArray, setidArray] = useState(0);
-  const [ActualScore, setActualScore] = useState(0);
   const [bonneReponse, setBonneReponse] = useState(null);
   const [reponseSelected, setReponseSelected] = useState(null);
 
@@ -27,7 +26,6 @@ export default function Play( { setScore, setHistorique, historique } ) {
 
     axios.post(`${API}/question/${questions[idArray]?.id}/valide`, data, headerToken)
       .then((res) => {
-        setActualScore(ActualScore + res.data.success ? 1 : -1);
         setBonneReponse(res.data.bonneReponse)
         setHistorique([...historique, {'question': questions[idArray]?.description, 'reponse': reponse, 'bonneReponse': res.data.bonneReponse, 'statut': res.data.success}])
         setScore(res.data.score);
@@ -41,7 +39,7 @@ export default function Play( { setScore, setHistorique, historique } ) {
       setBonneReponse(null);
 
       if(idArray === 9) {
-        navigate("/resultat", { state: {ActualScore} })
+        navigate("/resultat")
       }
   }
 

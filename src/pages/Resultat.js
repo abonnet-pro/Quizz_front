@@ -1,12 +1,40 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, {useEffect, useState} from "react";
 
 export default function Resultat({ historique }) {
-  const { state } = useLocation();
+
+    const [resultat, setResultat] = useState(null);
+
+    const calculResultat = () => {
+        let points = 0;
+        for(let res of historique) {
+            points = points + (res.statut ? 1 : -1)
+            console.log(points)
+        }
+        setResultat(points);
+    }
+
+    function getResultat() {
+
+
+        if(resultat === 0) {
+            return "Vous ni perdu ni gagné de point"
+        }
+        if(resultat > 0) {
+            return `Vous avez gagné ${resultat} points !`
+        }
+        if(resultat < 0) {
+            return `Vous avez perdu ${Math.abs(resultat)} points !`
+        }
+
+        return "";
+    }
+
+    useEffect(calculResultat, [historique]);
+
   return (
     <>
       <div>
-        <h2> Votre résultat final est de {state.ActualScore}</h2>
+        <h2 className="text-white mb-5 mt-5">{ getResultat() }</h2>
       </div>
       <table class="table table-hover">
         <thead>
