@@ -53,17 +53,9 @@ export default function Play( { setScore, setHistorique, historique } ) {
     if (!params.id) return;
     axios
       .get(`${API}/question/random/categorie/${params.id}?number=10`, headerToken)
-      .then((res) => {
-        setQuestions(res.data);
-      })
-      .catch((err) => {
-        handleError(err);
-      });
+      .then(res => setQuestions(res.data))
+      .catch((err) => handleError(err));
   }, [params.id]);
-
-  function isBonneReponse(reponse) {
-    return reponse === bonneReponse;
-  }
 
   function getBackground(reponse, index) {
     if(reponse === bonneReponse) {
