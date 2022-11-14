@@ -122,6 +122,51 @@ legend {
    text-align: center; 
 }
 
+.form-check-input:checked {
+    color: #e3e3e3 !important;
+    background-color: #e3e3e3 !important;
+    border-color: #e3e3e3 !important;
+}
+
+[type=radio]:checked::before {
+    color: #e3e3e3 !important;
+    background-color: #e3e3e3 !important;
+    border-color: #e3e3e3 !important;
+}
+
+[type=radio]::before {
+    color: #e3e3e3 !important;
+    border-color: #e3e3e3 !important;
+}
+
+
+.play-box {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 100%;
+    color: white;
+    border-collapse: separate;
+    border-spacing: 0 4em;
+}
+
+.playTable {
+    width: 50%;
+    text-align: center;
+    background-color: transparent !important;
+    margin-top: 20px !important;
+    font-size: 20px;
+}
+
+.questionLabel {
+    margin-left: 20px;
+}
+
+.no-background {
+    background-color: transparent !important;
+}
+
 .leader-title {
     color: white;
 }

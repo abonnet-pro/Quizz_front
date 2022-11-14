@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { Wheel } from 'react-custom-roulette'
 import axios from "axios";
 import {API} from "../services/url.service";
@@ -14,6 +15,8 @@ export default function CategorieChooser() {
     const [datas, setDatas] = useState([]);
     const [mustSpin, setMustSpin] = useState(false);
     const [go, setGo] = useState(false);
+
+    const navigate = useNavigate();
 
     const loadCategorie = () => {
         axios.get(`${API}/categorie/available`, headerToken)
@@ -54,6 +57,10 @@ export default function CategorieChooser() {
     }
 
     const handleGoClick = () => {
+        toast.success(categories[categoriesChoosed].name)
+        const idCategory = categories[categoriesChoosed].id
+        console.log(idCategory)
+        navigate("/play/" + categories[categoriesChoosed].id);
     }
 
     useEffect(loadCategorie, []);
