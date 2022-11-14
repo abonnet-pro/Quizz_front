@@ -222,8 +222,12 @@ legend {
     color: #ffffff;
 }
 
+.center {
+    text-align-last: center;
+}
+
 .medaille.or {
-    color: gold;
+    color: rgb(255, 215, 0);
 }
 
 .medaille.argent {
