@@ -159,6 +159,12 @@ legend {
     font-size: 20px;
 }
 
+.reponse {
+    width: 500px;
+    height: 100px;
+    font-size: 20px;
+}
+
 .questionLabel {
     margin-left: 20px;
 }

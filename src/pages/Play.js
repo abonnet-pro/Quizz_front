@@ -2,74 +2,58 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../services/url.service";
 import axios from "axios";
-import { token } from "../services/http.service";
+import {headerToken, token} from "../services/http.service";
 import { handleError } from "../services/error.service";
-import { getLocalStorage } from "../services/localStorage.service";
 import {toast} from "react-toastify";
+import {contextPrototype} from "../services/usersContext.service";
 
-export default function Play( { setScore, score } ) {
+export default function Play( { setScore, setHistorique, historique } ) {
   const [questions, setQuestions] = useState([]);
   const [idArray, setidArray] = useState(0);
   const [ActualScore, setActualScore] = useState(0);
-  const [idQuestion, setIdQuestion] = useState(0);
-  const [reponses, setReponses] = useState({ reponse: ''});
-  const [radioState, setradioState] = useState(null);
+  const [bonneReponse, setBonneReponse] = useState(null);
+  const [reponseSelected, setReponseSelected] = useState(null);
 
   const params = useParams();
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    setradioState(event.target.value)
-    const key = event.target.name
-    const value = event.target.value
-    setReponses({ ...reponses, [key]: value })
-    setIdQuestion(questions[idArray]?.id)
-  }
+  const handleClickReponse = async (reponse, index) => {
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-
-    if(reponses.reponse === '' || reponses.reponse === undefined || reponses.reponse === null) {
-      toast.error("Aucune réponse selectionnée")
-      return;
-    }
-
-    setidArray(idArray + 1)
+    setReponseSelected(index);
 
     const data = {
-      userId: getLocalStorage("user").id,
-      reponse: reponses.reponse
+      userId: contextPrototype.user.id,
+      reponse: reponse
     }
 
-    axios.post(`${API}/question/${idQuestion}/valide`, data, {
-        headers: { Authorization: "Bearer " + token() },
-      })
+    axios.post(`${API}/question/${questions[idArray]?.id}/valide`, data, headerToken)
       .then((res) => {
-        if(res.data.success === false) {
-          toast.error(`Mauvaise réponse. La bonne réponse était ${res.data.bonneReponse}`)
-        }
-        else {
-          toast.success(`Bonne réponse`)
-          setActualScore(ActualScore + 1)
-        }
+        setActualScore(ActualScore + res.data.success ? 1 : -1);
+        setBonneReponse(res.data.bonneReponse)
+        setHistorique([...historique, {'question': questions[idArray]?.description, 'reponse': reponse, 'bonneReponse': res.data.bonneReponse, 'statut': res.data.success}])
+        setScore(res.data.score);
       })
       .catch((err) => {
         handleError(err);
       });
+
       if(idArray === 9) {
         navigate("/resultat", { state: {ActualScore} })
       }
-      setReponses("")
-   
-  } 
+      await timeout(1000);
+      setReponseSelected(null);
+      setidArray(idArray + 1)
+      setBonneReponse(null)
+  }
+
+  function timeout(delay) {
+    return new Promise( res => setTimeout(res, delay) );
+  }
 
   useEffect(() => {
     if (!params.id) return;
     axios
-      .get(`${API}/question/random/categorie/${params.id}?number=10`, {
-        headers: { Authorization: "Bearer " + token() },
-      })
+      .get(`${API}/question/random/categorie/${params.id}?number=10`, headerToken)
       .then((res) => {
         setQuestions(res.data);
       })
@@ -78,89 +62,38 @@ export default function Play( { setScore, score } ) {
       });
   }, [params.id]);
 
+  function isBonneReponse(reponse) {
+    return reponse === bonneReponse;
+  }
+
+  function getBackground(reponse, index) {
+    if(reponse === bonneReponse) {
+      return 'bg-success';
+    }
+
+    if(index === reponseSelected && reponse !== bonneReponse) {
+      return 'bg-danger';
+    }
+
+    return "";
+  }
+
   return (
     <>
       <h1 className="leader-title"> Question {idArray + 1}</h1>
-      <form onSubmit={handleSubmit}>
-        <table className="play-box">
-          <thead>
-          <tr style={{ textAlign: "center" }}>
-            <th colSpan="2" className="playTable">
-              <h3>{questions[idArray]?.description}</h3>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td className="playTable">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="reponse"
-                id="reponse1"
-                checked={radioState === questions[idArray]?.reponse1}
-                value={questions[idArray]?.reponse1}
-                onChange={ handleChange }
-                />
-              <span className="questionLabel">
-                {questions[idArray]?.reponse1}
-              </span>
-            </td>
-            <td className="playTable">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="reponse"
-                id="reponse2"
-                checked={radioState === questions[idArray]?.reponse2}
-                value={questions[idArray]?.reponse2}
-                onChange={ handleChange }
-              />
-              <span className="questionLabel">
-                {questions[idArray]?.reponse2}
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td className="playTable">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="reponse"
-                id="reponse3"
-                checked={radioState === questions[idArray]?.reponse3}
-                value={questions[idArray]?.reponse3}
-                onChange={ handleChange }
-              />
-              <span className="questionLabel">
-                {questions[idArray]?.reponse3}
-              </span>
-            </td>
-            <td className="playTable">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="reponse"
-                id="reponse4"
-                checked={radioState === questions[idArray]?.reponse4}
-                value={questions[idArray]?.reponse4}
-                onChange={ handleChange }
-              />
-              <span className="questionLabel">
-                {questions[idArray]?.reponse4}
-              </span>
-            </td>
-          </tr>
-          <tr style={{ textAlign: "center" }}>
-            <td colSpan="4" className="playTable">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </form>
+      <div className="play-box">
+        <h3>{questions[idArray]?.description}</h3>
+      </div>
+      <div className="mt-5">
+        <div className="d-flex justify-content-center">
+          <div className={"card reponse m-3 pointer " + getBackground(questions[idArray]?.reponse1, 1)} onClick={ () => handleClickReponse(questions[idArray]?.reponse1, 1) }><label className="m-auto">{questions[idArray]?.reponse1}</label></div>
+          <div className={"card reponse m-3 pointer " + getBackground(questions[idArray]?.reponse2, 2)} onClick={ () => handleClickReponse(questions[idArray]?.reponse2, 2) }><label className="m-auto">{questions[idArray]?.reponse2}</label></div>
+        </div>
+        <div className="d-flex justify-content-center">
+          <div className={"card reponse m-3 pointer " + getBackground(questions[idArray]?.reponse3, 3)} onClick={ () => handleClickReponse(questions[idArray]?.reponse3, 3) }><label className="m-auto">{questions[idArray]?.reponse3}</label></div>
+          <div className={"card reponse m-3 pointer " + getBackground(questions[idArray]?.reponse4, 4)} onClick={ () => handleClickReponse(questions[idArray]?.reponse4, 4) }><label className="m-auto">{questions[idArray]?.reponse4}</label></div>
+        </div>
+      </div>
     </>
   );
 }

@@ -32,7 +32,7 @@ export default function CategorieChooser() {
 
     const categorieChoosed = () => {
         setGo(true);
-        toast.success(categories[categoriesChoosed].name)
+        // toast.success(categories[categoriesChoosed].name)
     }
 
     function buildDatas(categories) {
@@ -57,9 +57,8 @@ export default function CategorieChooser() {
     }
 
     const handleGoClick = () => {
-        toast.success(categories[categoriesChoosed].name)
+        // toast.success(categories[categoriesChoosed].name)
         const idCategory = categories[categoriesChoosed].id
-        console.log(idCategory)
         navigate("/play/" + categories[categoriesChoosed].id);
     }
 
