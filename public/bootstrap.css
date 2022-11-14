@@ -11117,6 +11117,12 @@ select.form-control {
   border-radius: 555px 25px 25px 25px/25px 25px 25px 555px;
 }
 
+.dropdown-menu-right {
+  overflow: hidden;
+  border-radius: 555px 25px 25px 25px/25px 25px 25px 555px;
+  /*transform: translateX(-100px);*/
+}
+
 .dropdown-divider {
   border-top-width: 2px;
 }

@@ -29,6 +29,17 @@ export default function Header({ score }) {
             <Link to='/questions' className="nav-link">Questions</Link>
           </div> : <></>
         }
+        <div className="navbar-nav me-auto">
+          <div className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</a>
+            <div className="dropdown-menu dropdown-menu-right">
+              <Link to="/my-account" className="dropdown-item" href="#">Mon compte</Link>
+              <Link to='/my-results' className="dropdown-item" href="#">Mes résultats</Link>
+              <div className="dropdown-divider"></div>
+              <Link to="/signout" className="dropdown-item" href="#">Déconnexion</Link>
+            </div>
+          </div>
+        </div>
       </div>
       {
         contextPrototype.user ?
@@ -41,18 +52,6 @@ export default function Header({ score }) {
             : <></>
       }
       <form className="d-flex">
-      <div className="navbar-nav me-auto">
-
-        <div className="nav-item dropdown">
-            <Link className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</Link>
-            <div className="dropdown-menu dropdown">
-              <Link to="/my-account" className="dropdown-item" href="#">Mon compte</Link>
-              <Link to='/my-results' className="dropdown-item" href="#">Mes résultats</Link>
-              <div className="dropdown-divider"></div>
-              <Link to="/signout" className="dropdown-item" href="#">Déconnexion</Link>
-            </div>
-          </div>
-        </div>
         {
           contextPrototype.user ?
               <>
