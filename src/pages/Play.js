@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../services/url.service";
 import axios from "axios";
-import {headerToken, token} from "../services/http.service";
+import {headerToken} from "../services/http.service";
 import { handleError } from "../services/error.service";
-import {toast} from "react-toastify";
 import {contextPrototype} from "../services/usersContext.service";
 
 export default function Play( { setScore, setHistorique, historique } ) {
@@ -36,14 +35,14 @@ export default function Play( { setScore, setHistorique, historique } ) {
       .catch((err) => {
         handleError(err);
       });
+      await timeout(1000);
+      setReponseSelected(null);
+      setidArray(idArray + 1);
+      setBonneReponse(null);
 
       if(idArray === 9) {
         navigate("/resultat", { state: {ActualScore} })
       }
-      await timeout(1000);
-      setReponseSelected(null);
-      setidArray(idArray + 1)
-      setBonneReponse(null)
   }
 
   function timeout(delay) {
