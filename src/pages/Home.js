@@ -9,11 +9,12 @@ import {token} from "../services/http.service";
 import {handleError} from "../services/error.service";
 import LoadingSpinner from '../components/LoadingSpinner';
 
-export default function Home({ setScore, user }) {
+export default function Home({ setScore, user, setHistorique }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const init = () => {
     setIsLoading(true)
+    setHistorique([])
     Aos.init({once : 'true'});
 
     if(!user) {

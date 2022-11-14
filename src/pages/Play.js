@@ -7,7 +7,7 @@ import { handleError } from "../services/error.service";
 import { getLocalStorage } from "../services/localStorage.service";
 import {toast} from "react-toastify";
 
-export default function Play( { setScore, score } ) {
+export default function Play( { setScore, setHistorique, historique } ) {
   const [questions, setQuestions] = useState([]);
   const [idArray, setidArray] = useState(0);
   const [ActualScore, setActualScore] = useState(0);
@@ -48,11 +48,15 @@ export default function Play( { setScore, score } ) {
       .then((res) => {
         if(res.data.success === false) {
           toast.error(`Mauvaise réponse. La bonne réponse était ${res.data.bonneReponse}`)
+          setActualScore(ActualScore - 1)
+          setHistorique([...historique, {'question': questions[idArray]?.description, 'reponse': reponses.reponse, 'bonneReponse': res.data.bonneReponse, 'statut': false}])
         }
         else {
           toast.success(`Bonne réponse`)
           setActualScore(ActualScore + 1)
+          setHistorique([...historique, {'question': questions[idArray]?.description, 'reponse': reponses.reponse, 'bonneReponse': null, 'statut': true}])
         }
+        setScore(res.data.score)
       })
       .catch((err) => {
         handleError(err);

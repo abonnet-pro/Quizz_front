@@ -27,6 +27,7 @@ import Resultat from './pages/Resultat';
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
   const [score, setScore] = useState(null);
+  const [historyReponse, sethistoryReponse] = useState([])
 
   contextPrototype.user = user;
   contextPrototype.setUser = setUser;
@@ -47,13 +48,13 @@ function App() {
       <ToastContainer hideProgressBar/>
     <div className='container'>
       <Routes>
-        <Route path='/' element={<Home setScore={ setScore } user={ user } />} />
+        <Route path='/' element={<Home setScore={ setScore } user={ user } setHistorique={sethistoryReponse} />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
         <Route path='/my-account' element={<MyAccount />}/>
-        <Route path='/play/:id' element={<Play setScore={ setScore } score={score} />}/>
-        <Route path='/resultat' element={<Resultat />}/>
+        <Route path='/play/:id' element={<Play setScore={ setScore } setHistorique={ sethistoryReponse } historique={ historyReponse } />}/>
+        <Route path='/resultat' element={<Resultat historique={ historyReponse } />}/>
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/wheel' element={<CategorieChooser />} />
         <Route path='/categories' element={<Categories />} />
