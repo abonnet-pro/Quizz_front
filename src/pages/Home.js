@@ -7,21 +7,26 @@ import axios from "axios";
 import {API} from "../services/url.service";
 import {token} from "../services/http.service";
 import {handleError} from "../services/error.service";
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Home({ setScore, user }) {
+  const [isLoading, setIsLoading] = useState(false);
 
   const init = () => {
+    setIsLoading(true)
     Aos.init({once : 'true'});
 
     if(!user) {
       return;
     }
 
+
     axios.get(`${API}/score/user/${user.id}`, {
       headers: { 'Authorization' : 'Bearer ' + token() }
     })
         .then(res => {
           setScore(res.data)
+          setIsLoading(false)
         })
         .catch(err => {
           handleError(err)
@@ -33,7 +38,7 @@ export default function Home({ setScore, user }) {
   return (
     <>
       {
-        contextPrototype.user ? <Link to="wheel" className="btn-lancer-quizz">Lancer un Quizz !</Link> : <></>
+        isLoading ? <LoadingSpinner /> : contextPrototype.user ? <Link to="wheel" className="btn-lancer-quizz">Lancer un Quizz !</Link> : <></>
       }
     </>
   )

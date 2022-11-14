@@ -19,6 +19,8 @@ import CategorieChooser from "./components/categorieChooser";
 import Questions from "./pages/Questions";
 import CategorieQuestions from "./pages/CategorieQuestions";
 import QuestionForm from "./pages/QuestionForm";
+import Categories from './pages/Categories';
+import MyAccount from './pages/My-account';
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
@@ -47,8 +49,10 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
+        <Route path='/my-account' element={<MyAccount />}/>
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/wheel' element={<CategorieChooser />} />
+        <Route path='/categories' element={<Categories />} />
         <Route path='/questions' element={ <Questions/> }/>
         <Route path='/categorie/:id/questions' element={ <CategorieQuestions/> }/>
         <Route path='/categorie/:id/question/form' element={ <QuestionForm/> }/>

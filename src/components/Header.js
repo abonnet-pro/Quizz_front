@@ -19,7 +19,7 @@ export default function Header({ score }) {
           <Link to='/' className="nav-link" href="#">Home</Link>
         </div>
         <div className="nav-item">
-          <Link to='/quizz' className="nav-link">Tous les quizz</Link>
+          <Link to='/categories' className="nav-link">Tous les quizz</Link>
         </div>
         <div className="nav-item">
           <Link to='/leaderboard' className="nav-link">Classement</Link>
