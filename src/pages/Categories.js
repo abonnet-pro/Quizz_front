@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import axios from "axios";
 import {API} from "../services/url.service";
 import {token} from "../services/http.service";
@@ -8,16 +8,21 @@ import BoxCategorie from '../components/BoxCategorie';
 
 export default function Categories() {
     const [categories, setCategories] = useState([]);
-    
-    axios.get(`${API}/categorie/all`, {
-        headers: { 'Authorization' : 'Bearer ' + token() }
-      })
-          .then(res => {
-            setCategories(res.data)
-          })
-          .catch(err => {
-            handleError(err)
-          })
+
+    const loadCategories = () => {
+        axios.get(`${API}/categorie/all`, {
+            headers: { 'Authorization' : 'Bearer ' + token() }
+        })
+            .then(res => {
+                setCategories(res.data)
+            })
+            .catch(err => {
+                handleError(err)
+            });
+    }
+
+    useEffect(loadCategories, []);
+
   return (
     <div>
     {categories.map((info) => (
