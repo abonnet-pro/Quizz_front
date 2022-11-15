@@ -289,6 +289,9 @@ legend {
     color: saddlebrown;
 }
 
+.bg-timer {
+    background-color: #637680;
+}
 
 .btn-lancer-quizz {
     margin: 0;

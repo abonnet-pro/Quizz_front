@@ -12,7 +12,7 @@ export default function Play( { setScore, setHistorique, historique } ) {
   const [bonneReponse, setBonneReponse] = useState(null);
   const [reponseSelected, setReponseSelected] = useState(null);
 
-  const [seconds, setSeconds] = useState(0);
+  const [milliseconds, setMilliseconds] = useState(0);
   const [isActive, setIsActive] = useState(true);
 
   const params = useParams();
@@ -45,8 +45,8 @@ export default function Play( { setScore, setHistorique, historique } ) {
       setReponseSelected(null);
       setidArray(idArray + 1);
       setBonneReponse(null);
-      setSeconds(0);
       setIsActive(true);
+      setMilliseconds(0);
 
       if(idArray === 9) {
         navigate(`/resultat/${params.id}`)
@@ -69,19 +69,19 @@ export default function Play( { setScore, setHistorique, historique } ) {
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-      }, 1000);
-      if(seconds === 10) {
+        setMilliseconds(milliseconds => milliseconds + 200);
+      }, 200);
+      if(milliseconds === 10000) {
         handleClickReponse("", null);
       }
-    } else if (!isActive && seconds !== 0) {
+    } else if (!isActive && milliseconds !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
   }
 
   useEffect(init, [params.id]);
-  useEffect(interval, [isActive, seconds]);
+  useEffect(interval, [isActive, milliseconds]);
 
   function getBackground(reponse, index) {
     if(reponse === bonneReponse) {
@@ -102,7 +102,7 @@ export default function Play( { setScore, setHistorique, historique } ) {
         <h3>{questions[idArray]?.description}</h3>
       </div>
       <div className="progress">
-        <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{ width : `${100-(10*seconds)}%`}}/>
+        <div className="progress-bar progress-bar-striped progress-bar-animated bg-timer" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{ width : `${100-(milliseconds/100)}%`}}/>
       </div>
       <div className="mt-5">
         <div className="d-flex justify-content-center">
