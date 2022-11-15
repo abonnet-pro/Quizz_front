@@ -35,7 +35,6 @@ export default function Categories() {
     <div className="regle mx-auto">
                 <h1 className="title mt-4 mb-4">Règles du Quizz</h1>
                 <ul className="lignes ms-3">
-                    <li className="m-2">Lancement d'une catégorie aléatoire</li>
                     <li className="m-2">Une bonne réponse : +1 Points !</li>
                     <li className="m-2">Une mauvaise réponse : -1 Points !</li>
                     <li className="m-2">Résultat du Quizz 10/10 : <i className="or bi bi-trophy me-1"/></li>
