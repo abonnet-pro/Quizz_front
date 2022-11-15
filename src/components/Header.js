@@ -34,7 +34,6 @@ export default function Header({ score }) {
             <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</a>
             <div className="dropdown-menu dropdown-menu-right">
               <Link to="/my-account" className="dropdown-item" href="#">Mon compte</Link>
-              <Link to='/my-results' className="dropdown-item" href="#">Mes résultats</Link>
               <div className="dropdown-divider"></div>
               <Link to="/signout" className="dropdown-item" href="#">Déconnexion</Link>
             </div>

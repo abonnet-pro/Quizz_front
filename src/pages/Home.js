@@ -7,13 +7,10 @@ import axios from "axios";
 import {API} from "../services/url.service";
 import {token} from "../services/http.service";
 import {handleError} from "../services/error.service";
-import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Home({ setScore, user, setHistorique }) {
-  const [isLoading, setIsLoading] = useState(false);
 
   const init = () => {
-    setIsLoading(true)
     setHistorique([])
     Aos.init({once : 'true'});
 
@@ -39,7 +36,16 @@ export default function Home({ setScore, user, setHistorique }) {
   return (
     <>
       {
-        isLoading ? <LoadingSpinner /> : contextPrototype.user ? <Link to="wheel" className="btn-lancer-quizz">Lancer un Quizz !</Link> : <></>
+        contextPrototype.user ? <Link to="wheel" className="btn-lancer-quizz">Lancer un Quizz !</Link> : ( 
+        <>
+        <div className="box-home">
+          <h1 className="leader-title">Bienvenu sur Quizz Game</h1><br/>
+          <h4>Pour accèder à l'entiereté du quizz et de ses fonctionnalités, vous devez vous connecter. Vient détrôner notre champion et soit à ton tour le leader de Quizz Game. <br /><br />
+          <Link to='/signup' className='link-home'> Crée un compte</Link> maintenant ou <Link className='link-home' to='/login'>connecte toi </Link>pour rejoindre l'aventure</h4>
+
+        </div>
+        </> 
+        )
       }
     </>
   )

@@ -23,6 +23,7 @@ import Categories from './pages/Categories';
 import MyAccount from './pages/My-account';
 import Play from './pages/Play';
 import Resultat from './pages/Resultat';
+import Protected from './components/Protected';
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
@@ -49,18 +50,18 @@ function App() {
     <div className='container'>
       <Routes>
         <Route path='/' element={<Home setScore={ setScore } user={ user } setHistorique={sethistoryReponse} />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Protected isAdmin={false} isLoggedIn={user} isPageLogin={true}><Login /></Protected>} />
+        <Route path='/signup' element={<Protected isAdmin={false} isLoggedIn={user} isPageLogin={true}><Signup /></Protected>} />
         <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
-        <Route path='/my-account' element={<MyAccount />}/>
-        <Route path='/play/:id' element={<Play setScore={ setScore } setHistorique={ sethistoryReponse } historique={ historyReponse } />}/>
-        <Route path='/resultat/:id' element={<Resultat historique={ historyReponse } setScore={ setScore } />}/>
+        <Route path='/my-account' element={<Protected isAdmin={false} isLoggedIn={user} isPageLogin={false}><MyAccount /></Protected>}/>
+        <Route path='/play/:id' element={<Protected isAdmin={false} isLoggedIn={user} isPageLogin={false}><Play setScore={ setScore } setHistorique={ sethistoryReponse } historique={ historyReponse } /></Protected>}/>
+        <Route path='/resultat/:id' element={<Protected isAdmin={false} isLoggedIn={user} isPageLogin={false}><Resultat historique={ historyReponse } setScore={ setScore } /></Protected>}/>
         <Route path='/leaderboard' element={<Leaderboard />} />
-        <Route path='/wheel' element={<CategorieChooser />} />
-        <Route path='/categories' element={<Categories />} />
-        <Route path='/questions' element={ <Questions/> }/>
-        <Route path='/categorie/:id/questions' element={ <CategorieQuestions/> }/>
-        <Route path='/categorie/:id/question/form' element={ <QuestionForm/> }/>
+        <Route path='/wheel' element={<Protected isAdmin={false} isLoggedIn={user} isPageLogin={false}><CategorieChooser /></Protected>} />
+        <Route path='/categories' element={<Protected isAdmin={false} isLoggedIn={user} isPageLogin={false}><Categories /></Protected>} />
+        <Route path='/questions' element={<Protected isAdmin={true} isLoggedIn={user} isPageLogin={false}><Questions/> </Protected>}/>
+        <Route path='/categorie/:id/questions' element={ <Protected isAdmin={false} isLoggedIn={user} isPageLogin={false}><CategorieQuestions/></Protected> }/>
+        <Route path='/categorie/:id/question/form' element={ <Protected isAdmin={false} isLoggedIn={user} isPageLogin={false}><QuestionForm/></Protected> }/>
       </Routes>
     </div>
     </>

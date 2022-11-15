@@ -75,6 +75,32 @@ body {
       animation: 2s;
 }
 
+.box-home {
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      width: 550px;
+      animation: 2s;
+      text-align: center
+}
+
+.no-decoration {
+    text-decoration: none!important;
+}
+
+.link-home {
+    text-decoration: none;
+    color: pink;
+}
+
+.link-home:hover {
+    text-decoration: underline;
+    color: pink;
+}
+
 .back-box-login {
     z-index: 100;
     background: url("./assets/cadre.png");
