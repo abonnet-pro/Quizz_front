@@ -39,7 +39,7 @@ export default function Play( { setScore, setHistorique, historique } ) {
       setBonneReponse(null);
 
       if(idArray === 9) {
-        navigate("/resultat")
+        navigate(`/resultat/${params.id}`)
       }
   }
 

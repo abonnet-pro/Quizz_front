@@ -277,15 +277,15 @@ legend {
     text-align-last: center;
 }
 
-.medaille.or {
+.or {
     color: rgb(255, 215, 0);
 }
 
-.medaille.argent {
+.argent {
     color: silver;
 }
 
-.medaille.bronze {
+.bronze {
     color: saddlebrown;
 }
 

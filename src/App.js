@@ -54,7 +54,7 @@ function App() {
         <Route path="/signout" element={ <Logout setUser={ setUser }/> }/>
         <Route path='/my-account' element={<MyAccount />}/>
         <Route path='/play/:id' element={<Play setScore={ setScore } setHistorique={ sethistoryReponse } historique={ historyReponse } />}/>
-        <Route path='/resultat' element={<Resultat historique={ historyReponse } />}/>
+        <Route path='/resultat/:id' element={<Resultat historique={ historyReponse } setScore={ setScore } />}/>
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/wheel' element={<CategorieChooser />} />
         <Route path='/categories' element={<Categories />} />
