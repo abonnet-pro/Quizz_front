@@ -12,6 +12,9 @@ export default function Play( { setScore, setHistorique, historique } ) {
   const [bonneReponse, setBonneReponse] = useState(null);
   const [reponseSelected, setReponseSelected] = useState(null);
 
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(true);
+
   const params = useParams();
   const navigate = useNavigate();
 
@@ -21,6 +24,7 @@ export default function Play( { setScore, setHistorique, historique } ) {
       return;
     }
 
+    setIsActive(false);
     setReponseSelected(index);
 
     const data = {
@@ -41,6 +45,8 @@ export default function Play( { setScore, setHistorique, historique } ) {
       setReponseSelected(null);
       setidArray(idArray + 1);
       setBonneReponse(null);
+      setSeconds(0);
+      setIsActive(true);
 
       if(idArray === 9) {
         navigate(`/resultat/${params.id}`)
@@ -51,13 +57,31 @@ export default function Play( { setScore, setHistorique, historique } ) {
     return new Promise( res => setTimeout(res, delay) );
   }
 
-  useEffect(() => {
+  const init = () => {
     if (!params.id) return;
     axios
-      .get(`${API}/question/random/categorie/${params.id}?number=10`, headerToken)
-      .then(res => setQuestions(res.data))
-      .catch((err) => handleError(err));
-  }, [params.id]);
+        .get(`${API}/question/random/categorie/${params.id}?number=10`, headerToken)
+        .then(res => setQuestions(res.data))
+        .catch((err) => handleError(err));
+  }
+
+  const interval = () => {
+    let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 1000);
+      if(seconds === 10) {
+        handleClickReponse("", null);
+      }
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }
+
+  useEffect(init, [params.id]);
+  useEffect(interval, [isActive, seconds]);
 
   function getBackground(reponse, index) {
     if(reponse === bonneReponse) {
@@ -76,6 +100,9 @@ export default function Play( { setScore, setHistorique, historique } ) {
       <h1 className="leader-title"> Question {idArray + 1}</h1>
       <div className="play-box">
         <h3>{questions[idArray]?.description}</h3>
+      </div>
+      <div className="progress">
+        <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{ width : `${100-(10*seconds)}%`}}/>
       </div>
       <div className="mt-5">
         <div className="d-flex justify-content-center">
