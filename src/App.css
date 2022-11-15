@@ -293,6 +293,24 @@ legend {
     background-color: #637680;
 }
 
+.title {
+    text-align: -webkit-center;
+}
+
+.lignes {
+    font-size: 25px;
+}
+
+.regle {
+    width: 50%;
+    height: 500px;
+    background-color: #1e7d34;
+    color: white;
+    align-self: self-end;
+    border-radius: 50px;
+    border: 5px solid black;
+}
+
 .btn-lancer-quizz {
     margin: 0;
     position: absolute;

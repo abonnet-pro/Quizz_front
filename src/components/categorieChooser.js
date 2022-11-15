@@ -32,7 +32,6 @@ export default function CategorieChooser() {
 
     const categorieChoosed = () => {
         setGo(true);
-        // toast.success(categories[categoriesChoosed].name)
     }
 
     function buildDatas(categories) {
@@ -65,22 +64,34 @@ export default function CategorieChooser() {
     useEffect(loadCategorie, []);
 
     return (
-        <div className="wheel">
-
-            <Wheel
-                mustStartSpinning={mustSpin}
-                prizeNumber={categoriesChoosed}
-                data={datas}
-                backgroundColors={['#3e3e3e', '#df3428']}
-                textColors={['#ffffff']}
-                spinDuration={0.4}
-                onStopSpinning={ categorieChoosed }
-            />
-
-            {
-                go ? <button className="go" onClick={handleGoClick}>GO</button> : <button className="spin" onClick={handleSpinClick}>SPIN</button>
-            }
-
+        <div className="d-flex justify-content-between">
+            <div className="wheel">
+                <Wheel
+                    mustStartSpinning={mustSpin}
+                    prizeNumber={categoriesChoosed}
+                    data={datas}
+                    backgroundColors={['#3e3e3e', '#df3428']}
+                    textColors={['#ffffff']}
+                    spinDuration={0.4}
+                    onStopSpinning={ categorieChoosed }
+                />
+                {
+                    go ? <button className="go mt-2" onClick={handleGoClick}>GO</button> : <button className="spin mt-2" onClick={handleSpinClick}>SPIN</button>
+                }
+            </div>
+            <div className="regle">
+                <h1 className="title mt-4 mb-4">Règles du Quizz</h1>
+                <ul className="lignes ms-3">
+                    <li className="m-2">Lancement d'une catégorie aléatoire</li>
+                    <li className="m-2">Une bonne réponse : +1 Points !</li>
+                    <li className="m-2">Une mauvaise réponse : -1 Points !</li>
+                    <li className="m-2">Résultat du Quizz 10/10 : <i className="or bi bi-trophy me-1"/></li>
+                    <li className="m-2">Résultat du Quizz minimum 7/10 : <i className="argent bi bi-trophy me-1"/></li>
+                    <li className="m-2">Résultat du Quizz minimum 5/10 : <i className="bronze bi bi-trophy me-1"/></li>
+                    <li className="m-2">Bonne chance !</li>
+                </ul>
+            </div>
         </div>
+
     )
 }
