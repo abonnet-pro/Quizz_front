@@ -70,7 +70,6 @@ export default function Play( { setScore, setHistorique, historique } ) {
         .get(`${API}/question/random/categorie/${params.id}?number=10`, headerToken)
         .then(res => setQuestions(res.data))
         .catch((err) => handleError(err));
-      // quizzSoundBackground = new Audio(quizz);
       quizzSoundBackground.play();
   }
 
@@ -94,11 +93,11 @@ export default function Play( { setScore, setHistorique, historique } ) {
 
   function getBackground(reponse, index) {
     if(reponse === bonneReponse) {
-      return 'bg-success';
+      return 'bg-success win';
     }
 
     if(index === reponseSelected && reponse !== bonneReponse) {
-      return 'bg-danger';
+      return 'bg-danger lose';
     }
 
     return "";

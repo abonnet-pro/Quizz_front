@@ -301,6 +301,47 @@ legend {
     font-size: 25px;
 }
 
+.lose {
+    animation: shake 0.5s;
+}
+
+.win {
+    animation: win 0.5s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(1em);
+    }
+    40% {
+        transform: translate(-1em);
+    }
+    60% {
+        transform: translate(1em);
+    }
+    80% {
+        transform: translate(-1em);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes win {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .regle {
     width: 50%;
     height: 500px;
