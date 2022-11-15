@@ -17,6 +17,10 @@ export default function Play( { setScore, setHistorique, historique } ) {
 
   const handleClickReponse = async (reponse, index) => {
 
+    if(reponseSelected != null) {
+      return;
+    }
+
     setReponseSelected(index);
 
     const data = {
