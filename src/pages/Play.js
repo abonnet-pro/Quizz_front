@@ -5,6 +5,9 @@ import axios from "axios";
 import {headerToken} from "../services/http.service";
 import { handleError } from "../services/error.service";
 import {contextPrototype} from "../services/usersContext.service";
+import wrong from "../assets/sounds/wrong-answer.mp3";
+import right from "../assets/sounds/right-answer.mp3";
+import quizz from "../assets/sounds/quizz.mp3";
 
 export default function Play( { setScore, setHistorique, historique } ) {
   const [questions, setQuestions] = useState([]);
@@ -14,6 +17,8 @@ export default function Play( { setScore, setHistorique, historique } ) {
 
   const [milliseconds, setMilliseconds] = useState(0);
   const [isActive, setIsActive] = useState(true);
+
+  const [quizzSoundBackground, setAudio] = useState( new Audio(quizz) );
 
   const params = useParams();
   const navigate = useNavigate();
@@ -34,6 +39,7 @@ export default function Play( { setScore, setHistorique, historique } ) {
 
     axios.post(`${API}/question/${questions[idArray]?.id}/valide`, data, headerToken)
       .then((res) => {
+        reponse ? (res.data.success ? new Audio(right).play() : new Audio(wrong).play()) : new Audio(wrong).play()
         setBonneReponse(res.data.bonneReponse)
         setHistorique([...historique, {'question': questions[idArray]?.description, 'reponse': reponse, 'bonneReponse': res.data.bonneReponse, 'statut': res.data.success}])
         setScore(res.data.score);
@@ -49,6 +55,7 @@ export default function Play( { setScore, setHistorique, historique } ) {
       setMilliseconds(0);
 
       if(idArray === 9) {
+        quizzSoundBackground.pause();
         navigate(`/resultat/${params.id}`)
       }
   }
@@ -63,6 +70,8 @@ export default function Play( { setScore, setHistorique, historique } ) {
         .get(`${API}/question/random/categorie/${params.id}?number=10`, headerToken)
         .then(res => setQuestions(res.data))
         .catch((err) => handleError(err));
+      // quizzSoundBackground = new Audio(quizz);
+      quizzSoundBackground.play();
   }
 
   const interval = () => {

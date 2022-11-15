@@ -5,8 +5,8 @@ import axios from "axios";
 import {API} from "../services/url.service";
 import {headerToken} from "../services/http.service";
 import {handleError} from "../services/error.service";
-import {toast} from "react-toastify";
 import randomColor from "randomcolor";
+import loterie from "../assets/sounds/loterie.mp3"
 
 export default function CategorieChooser() {
 
@@ -52,12 +52,11 @@ export default function CategorieChooser() {
     }
 
     const handleSpinClick = () => {
+        new Audio(loterie).play()
         setMustSpin(true);
     }
 
     const handleGoClick = () => {
-        // toast.success(categories[categoriesChoosed].name)
-        const idCategory = categories[categoriesChoosed].id
         navigate("/play/" + categories[categoriesChoosed].id);
     }
 
@@ -75,6 +74,7 @@ export default function CategorieChooser() {
                     spinDuration={0.4}
                     onStopSpinning={ categorieChoosed }
                 />
+
                 {
                     go ? <button className="go mt-2" onClick={handleGoClick}>GO</button> : <button className="spin mt-2" onClick={handleSpinClick}>SPIN</button>
                 }

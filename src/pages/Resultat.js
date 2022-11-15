@@ -5,6 +5,8 @@ import {headerToken} from "../services/http.service";
 import {handleError} from "../services/error.service";
 import {useParams} from "react-router-dom";
 import {contextPrototype} from "../services/usersContext.service";
+import win from "../assets/sounds/win.mp3";
+import lose from "../assets/sounds/game-over.wav";
 
 export default function Resultat({ historique, setScore }) {
 
@@ -40,6 +42,12 @@ export default function Resultat({ historique, setScore }) {
             .catch((err) => {
                 handleError(err);
             });
+
+        if(medailleOr || medailleArgent || medailleBronze) {
+            new Audio(win).play();
+        } else {
+            new Audio(lose).play();
+        }
     }
 
     function getResultat() {
