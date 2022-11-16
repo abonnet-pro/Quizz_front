@@ -106,28 +106,27 @@ export default function Resultat({ historique, setScore }) {
             <thead>
                 <tr className="table-primary">
                     <th scope="col">Question</th>
-                    <th scope="col">Votre réponse</th>
+                    <th scope="col">{ historique[0]?.username ? "Réponse donnée" : "Votre réponse"}</th>
                     <th scope="col">Bonne Réponse</th>
+                    {
+                        historique[0]?.username ? <th scope="col">Joueur répondant</th> :<></>
+                    }
                 </tr>
             </thead>
             <tbody>
-                {historique.map((history) => (
-                    <>
-                        {history.statut ? (
-                            <tr className="table-success">
-                                <th scope="row">{history.question}</th>
+                { historique.map(history => {
+                        return(
+                            <tr className={history.statut ? "table-success" : "table-danger"}>
+                                <td scope="row">{history.question}</td>
                                 <td>{history.reponse}</td>
-                                <td>/</td>
+                                <td>{history.statut ? "/" : history.bonneReponse}</td>
+                                {
+                                    history.username != null ? <td>{history.username}</td> : <></>
+                                }
                             </tr>
-                        ) : (
-                            <tr className="table-danger">
-                                <th scope="row">{history.question}</th>
-                                <td>{history.reponse}</td>
-                                <td>{history.bonneReponse}</td>
-                            </tr>
-                        )}
-                    </>
-                ))}
+                        )
+                }
+                )}
             </tbody>
         </table>
     </>

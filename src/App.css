@@ -251,6 +251,39 @@ legend {
     font-family: "Cabin Sketch", cursive;
 }
 
+.recherche {
+    align-self:center;
+    margin-left: 5%;
+}
+
+.game-found {
+    align-self: center;
+    text-align: center;
+}
+
+.fs-50 {
+    font-size: 50px;
+}
+
+.fs-25 {
+    font-size: 25px;
+}
+
+.recherche div {
+    place-content: center;
+}
+
+.find {
+    border-radius: 10px;
+    padding: 5px;
+    background-color: darkgreen;
+    color: white;
+    font-size: 30px;
+    font-family: "Cabin Sketch", cursive;
+    height: fit-content;
+    align-self: center;
+}
+
 .spin {
     border-radius: 10px;
     padding: 5px;
@@ -309,6 +342,16 @@ legend {
     animation: win 0.5s;
 }
 
+.bulle{
+    padding: 10px;
+    border-radius: 10%;
+    width: fit-content;
+    background-color: #d70000;
+    position: absolute;
+    right: -4%;
+    top: -30%;
+}
+
 @keyframes shake {
     0% {
         transform: translate(0);
@@ -340,6 +383,22 @@ legend {
     100% {
         transform: scale(1);
     }
+}
+
+@keyframes decompte {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.decompte {
+    animation: decompte 0.5s;
 }
 
 .regle {

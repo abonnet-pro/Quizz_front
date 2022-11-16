@@ -92,6 +92,10 @@ export default function Play( { setScore, setHistorique, historique } ) {
   useEffect(interval, [isActive, milliseconds]);
 
   function getBackground(reponse, index) {
+    if(!bonneReponse) {
+      return "";
+    }
+
     if(reponse === bonneReponse) {
       return 'bg-success win';
     }
@@ -99,8 +103,6 @@ export default function Play( { setScore, setHistorique, historique } ) {
     if(index === reponseSelected && reponse !== bonneReponse) {
       return 'bg-danger lose';
     }
-
-    return "";
   }
 
   return (

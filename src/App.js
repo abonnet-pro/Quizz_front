@@ -23,6 +23,7 @@ import Categories from './pages/Categories';
 import MyAccount from './pages/My-account';
 import Play from './pages/Play';
 import Resultat from './pages/Resultat';
+import Multiplayer from "./pages/Multiplayer";
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
@@ -61,6 +62,7 @@ function App() {
         <Route path='/questions' element={ <Questions/> }/>
         <Route path='/categorie/:id/questions' element={ <CategorieQuestions/> }/>
         <Route path='/categorie/:id/question/form' element={ <QuestionForm/> }/>
+        <Route path='/multiplayer' element={ <Multiplayer historique={ historyReponse } setHistorique={ sethistoryReponse } setScore={ setScore }/> }/>
       </Routes>
     </div>
     </>

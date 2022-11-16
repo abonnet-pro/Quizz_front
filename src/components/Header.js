@@ -24,6 +24,9 @@ export default function Header({ score }) {
         <div className="nav-item">
           <Link to='/leaderboard' className="nav-link">Classement</Link>
         </div>
+        <div className="nav-item">
+          <Link to='/multiplayer' className="nav-link">Multiplayer</Link>
+        </div>
         {
           admin() ? <div className="nav-item">
             <Link to='/questions' className="nav-link">Questions</Link>
@@ -35,7 +38,7 @@ export default function Header({ score }) {
             <div className="dropdown-menu dropdown-menu-right">
               <Link to="/my-account" className="dropdown-item" href="#">Mon compte</Link>
               <Link to='/my-results' className="dropdown-item" href="#">Mes résultats</Link>
-              <div className="dropdown-divider"></div>
+              <div className="dropdown-divider"/>
               <Link to="/signout" className="dropdown-item" href="#">Déconnexion</Link>
             </div>
           </div>
