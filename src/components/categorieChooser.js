@@ -79,7 +79,7 @@ export default function CategorieChooser() {
                     go ? <button className="go mt-2" onClick={handleGoClick}>GO</button> : <button className="spin mt-2" onClick={handleSpinClick}>SPIN</button>
                 }
             </div>
-            <div className="regle">
+            <div className="regle h-auto">
                 <h1 className="title mt-4 mb-4">Règles du Quizz</h1>
                 <ul className="lignes ms-3">
                     <li className="m-2">Lancement d'une catégorie aléatoire</li>

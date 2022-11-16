@@ -32,7 +32,7 @@ export default function Categories() {
         />
     ))}
     </div>
-    <div className="regle mx-auto">
+    <div className="regle mx-auto h-auto">
                 <h1 className="title mt-4 mb-4">Règles du Quizz</h1>
                 <ul className="lignes ms-3">
                     <li className="m-2">Une bonne réponse : +1 Points !</li>
