@@ -10,7 +10,7 @@ export default function Categories() {
     const [categories, setCategories] = useState([]);
 
     const loadCategories = () => {
-        axios.get(`${API}/categorie/all`, {
+        axios.get(`${API}/categorie/available`, {
             headers: { 'Authorization' : 'Bearer ' + token() }
         })
             .then(res => {
@@ -24,12 +24,26 @@ export default function Categories() {
     useEffect(loadCategories, []);
 
   return (
-    <div>
+    <>
+    <div className='row'>
     {categories.map((info) => (
         <BoxCategorie
           details={info}
         />
     ))}
     </div>
+    <div className="regle mx-auto">
+                <h1 className="title mt-4 mb-4">Règles du Quizz</h1>
+                <ul className="lignes ms-3">
+                    <li className="m-2">Une bonne réponse : +1 Points !</li>
+                    <li className="m-2">Une mauvaise réponse : -1 Points !</li>
+                    <li className="m-2">Résultat du Quizz 10/10 : <i className="or bi bi-trophy me-1"/></li>
+                    <li className="m-2">Résultat du Quizz minimum 7/10 : <i className="argent bi bi-trophy me-1"/></li>
+                    <li className="m-2">Résultat du Quizz minimum 5/10 : <i className="bronze bi bi-trophy me-1"/></li>
+                    <li className="m-2">Bonne chance !</li>
+                </ul>
+            </div>
+    </>
+    
   )
 }
