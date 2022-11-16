@@ -93,7 +93,7 @@ export default function Multiplayer({ historique, setHistorique, setScore }) {
     return(
         <>
             {
-                gameFound ? <PlayMultijoueur historique={ historique } setHistorique={ setHistorique } categorieId={ 2 } setScore={ setScore } stompClient={ stompClient } socket={ socketClient }/>
+                gameFound ? <PlayMultijoueur historique={ historique } setHistorique={ setHistorique } categorieId={ categorieChoosed } setScore={ setScore } stompClient={ stompClient } socket={ socketClient }/>
                     :
                     <div className="d-flex justify-content-between">
                         {
@@ -129,7 +129,7 @@ export default function Multiplayer({ historique, setHistorique, setScore }) {
                                 <li className="m-2">Une bonne réponse : +1 Points !</li>
                                 <li className="m-2">Une mauvaise réponse : -1 Points !</li>
                                 <li className="m-2">Une bonne réponse adverse: -1 Points !</li>
-                                <li className="m-2">Une mauvaise réponse adverse: -1 Points !</li>
+                                <li className="m-2">Une mauvaise réponse adverse: +1 Points !</li>
                                 <li className="m-2">Résultat du Quizz 10/10 : <i className="or bi bi-trophy me-1"/></li>
                                 <li className="m-2">Résultat du Quizz minimum 7/10 : <i className="argent bi bi-trophy me-1"/></li>
                                 <li className="m-2">Résultat du Quizz minimum 5/10 : <i className="bronze bi bi-trophy me-1"/></li>
