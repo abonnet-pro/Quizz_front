@@ -93,7 +93,7 @@ export default function Multiplayer({ historique, setHistorique, setScore }) {
     return(
         <>
             {
-                gameFound ? <PlayMultijoueur historique={ historique } setHistorique={ setHistorique } categorieId={ categorieChoosed } setScore={ setScore } stompClient={ stompClient } socket={ socketClient }/>
+                gameFound ? <PlayMultijoueur historique={ historique } setHistorique={ setHistorique } categorieId={ categorieChoosed.id } setScore={ setScore } stompClient={ stompClient } socket={ socketClient }/>
                     :
                     <div className="d-flex justify-content-between">
                         {
