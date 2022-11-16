@@ -25,6 +25,7 @@ import Play from './pages/Play';
 import Resultat from './pages/Resultat';
 import Multiplayer from "./pages/Multiplayer";
 import Protected from './components/Protected';
+import {loadScore} from "./services/score.service";
 
 function App() {
   const [user, setUser] = useState(getLocalStorage(USER_KEY))
@@ -38,6 +39,10 @@ function App() {
     user: user,
     setUser: setUser
   }
+
+  loadScore(setScore, user.id);
+
+  useEffect(loadScore, [user])
 
   return (
     <>
